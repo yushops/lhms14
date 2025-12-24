@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>初一四班班级博客</title>
+
+<!-- 添加浏览器图标 -->
+<link rel="icon" type="image/webp" href="https://edgeoneimg.cdn.sn/i/694a791bbc06a_1766488347.webp">
+<link rel="shortcut icon" href="https://edgeoneimg.cdn.sn/i/694a791bbc06a_1766488347.webp">
+<link rel="apple-touch-icon" href="https://edgeoneimg.cdn.sn/i/694a791bbc06a_1766488347.webp">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI','Microsoft YaHei',sans-serif}
+body{background:#ffffff;color:#333;min-height:100vh;padding:15px}
+.container{max-width:1200px;margin:0 auto;width:100%}
+.header{text-align:center;padding:25px 0;margin-bottom:30px}
+.main-title{font-size:2.2rem;color:#2c3e50;margin-bottom:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:15px;flex-wrap:wrap}
+.main-title img{width:80px;height:80px;object-fit:cover;border-radius:8px;background:white;padding:5px;box-shadow:0 3px 10px rgba(0,0,0,0.1)}
+.subtitle{font-size:1.1rem;color:#7f8c8d;max-width:100%;margin:0 auto;line-height:1.5}
+.class-info-section{background:white;border-radius:12px;padding:25px;margin-bottom:35px;box-shadow:0 5px 20px rgba(0,0,0,0.05);display:flex;flex-direction:column-reverse;align-items:center;gap:25px}
+.class-info-content{width:100%}
+.class-info-title{font-size:1.6rem;color:#2c3e50;margin-bottom:20px;text-align:center}
+.class-info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.info-item{display:flex;align-items:center;gap:12px;padding:12px;background:#f8f9fa;border-radius:10px}
+.info-icon{font-size:1.5rem;color:#3498db;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-text{flex:1;min-width:0}
+.info-label{font-size:0.9rem;color:#7f8c8d;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.info-value{font-size:1.1rem;color:#2c3e50;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.class-emblem{width:140px;height:140px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 15px rgba(0,0,0,0.1);flex-shrink:0}
+.class-emblem img{width:120px;height:120px;object-fit:contain}
+.blog-posts{display:flex;flex-direction:column;gap:30px}
+.posts-main{display:flex;flex-direction:column;gap:30px;width:100%}
+.sidebar{background:white;border-radius:12px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.05);width:100%}
+.blog-post{background:white;border-radius:12px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.05);transition:transform 0.3s,box-shadow 0.3s;display:block;width:100%}
+.blog-post.hidden{display:none}
+.blog-post:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.1)}
+.post-header{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.post-title{font-size:1.5rem;color:#2c3e50;margin:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.post-title img{width:40px;height:40px;object-fit:cover;border-radius:6px;opacity:0.8;flex-shrink:0}
+.post-date{color:#95a5a6;font-size:0.9rem;text-align:right}
+.post-image-container{width:100%;height:250px;border-radius:10px;overflow:hidden;margin-bottom:20px}
+.post-image{width:100%;height:100%;object-fit:cover}
+.post-content{font-size:1rem;line-height:1.7;color:#555;margin-bottom:20px}
+.post-footer{display:flex;flex-direction:column;gap:15px;border-top:1px solid #eee;padding-top:20px}
+.post-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{background:#e8f4fc;color:#3498db;padding:6px 12px;border-radius:18px;font-size:0.85rem;cursor:pointer;flex-shrink:0}
+.tag.active{background:#3498db;color:white}
+.read-more{color:#3498db;text-decoration:none;font-weight:600;font-size:1rem;cursor:pointer;align-self:flex-end}
+.sidebar-title{font-size:1.3rem;color:#2c3e50;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #3498db}
+.category-list{list-style:none}
+.category-list li{margin-bottom:12px}
+.category-list a{color:#555;text-decoration:none;display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.category-list a.active{color:#3498db;font-weight:600}
+.category-count{background:#f0f0f0;padding:2px 8px;border-radius:10px;font-size:0.8rem;min-width:24px;text-align:center;display:inline-block}
+.recent-posts{margin-top:25px}
+.recent-post{display:flex;align-items:center;gap:12px;margin-bottom:15px;padding-bottom:15px;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.recent-post:last-child{border-bottom:none}
+.recent-image{width:60px;height:60px;border-radius:6px;object-fit:cover;flex-shrink:0}
+.recent-content{flex:1;min-width:0}
+.recent-title{font-size:0.95rem;color:#2c3e50;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.recent-date{font-size:0.8rem;color:#95a5a6}
+.footer{text-align:center;margin-top:40px;padding-top:25px;border-top:1px solid #eee;color:#7f8c8d;width:100%}
+.hidden-content{display:none;margin-top:15px}
+
+@media (min-width: 768px) {
+    .container{padding:0 20px}
+    .main-title{font-size:2.8rem}
+    .subtitle{font-size:1.2rem}
+    .class-info-section{flex-direction:row;padding:30px}
+    .class-emblem{order:-1}
+    .class-info-content{flex:1}
+    .class-info-title{text-align:left}
+    .class-info-grid{grid-template-columns:repeat(3,1fr)}
+    .blog-posts{flex-direction:row}
+    .posts-main{width:70%}
+    .sidebar{width:30%}
+    .post-header{flex-direction:row;justify-content:space-between;align-items:center}
+    .post-footer{flex-direction:row;justify-content:space-between;align-items:center}
+    .post-image-container{height:300px}
+}
+
+@media (min-width: 1024px) {
+    .main-title{font-size:3rem}
+    .subtitle{font-size:1.3rem}
+    .class-info-section{padding:40px}
+    .class-info-grid{grid-template-columns:repeat(2,1fr)}
+    .post-image-container{height:350px}
+}
+
+@media (min-width: 1200px) {
+    .post-image-container{height:400px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1 class="main-title">
+<img src="https://edgeoneimg.cdn.sn/i/694a791bbc06a_1766488347.webp" alt="班级徽章">
+初一四班班级博客
+</h1>
+<p class="subtitle">记录成长点滴，分享精彩瞬间，共创美好回忆</p>
+</div>
+
+<div class="class-info-section">
+<div class="class-emblem">
+<img src="https://edgeoneimg.cdn.sn/i/694a791bbc06a_1766488347.webp" alt="班级徽章">
+</div>
+<div class="class-info-content">
+<h2 class="class-info-title">班级介绍</h2>
+<div class="class-info-grid">
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-users"></i></div>
+<div class="info-text">
+<div class="info-label">班级人数</div>
+<div class="info-value">50人</div>
+</div>
+</div>
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-user-tie"></i></div>
+<div class="info-text">
+<div class="info-label">班主任</div>
+<div class="info-value">刘老师</div>
+</div>
+</div>
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-school"></i></div>
+<div class="info-text">
+<div class="info-label">所在学校</div>
+<div class="info-value">龙会中学</div>
+</div>
+</div>
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+<div class="info-text">
+<div class="info-label">班级口号</div>
+<div class="info-value">笃实达雅，行健致远</div>
+</div>
+</div>
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+<div class="info-text">
+<div class="info-label">建班时间</div>
+<div class="info-value">2025年9月</div>
+</div>
+</div>
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-trophy"></i></div>
+<div class="info-text">
+<div class="info-label">班级荣誉</div>
+<div class="info-value">暂无</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="blog-posts">
+<div class="posts-main">
+
+<div class="blog-post" data-tags="运动会 班级活动 体育">
+    <div class="post-header">
+        <h2 class="post-title">
+            <img src="https://edgeoneimg.cdn.sn/i/694bc7e2b2c27_1766574050.webp="运动会">
+            秋季运动会精彩回顾
+        </h2>
+        <div class="post-date">2025年12月9日</div>
+    </div>
+    <div class="post-image-container">
+        <img src="https://edgeoneimg.cdn.sn/i/694bc7e2b2c27_1766574050.webp" alt="运动会" class="post-image">
+    </div>
+    <div class="post-content">
+        <p>前两周，我校成功举办了秋季运动会。我们初一四班的同学们积极参与各项比赛，展现了团结拼搏的精神风貌。</p>
+        <p>这次运动会不仅锻炼了我们的身体素质，更增强了班级的凝聚力。同学们在比赛中互相鼓励，在赛场下互相帮助，真正体现了我们班级团结友爱的精神。</p>
+        <div class="hidden-content">
+        </div>
+    </div>
+    <div class="post-footer">
+        <div class="post-tags">
+            <span class="tag active" onclick="filterPosts('all')">全部</span>
+            <span class="tag" onclick="filterPosts('运动会')">运动会</span>
+            <span class="tag" onclick="filterPosts('班级活动')">班级活动</span>
+            <span class="tag" onclick="filterPosts('体育')">体育</span>
+        </div>
+        <a class="read-more" onclick="toggleContent(this)">展开全文</a>
+    </div>
+</div>
+
+
+<!-- 新增文章示例
+<div class="blog-post" data-tags="科技节 创新 科学">
+    <div class="post-header">
+        <h2 class="post-title">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="科技节">
+            科技节：我们的创意作品展示
+        </h2>
+        <div class="post-date">2023年5月8日</div>
+    </div>
+    <div class="post-image-container">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="科技节" class="post-image">
+    </div>
+    <div class="post-content">
+        <p>学校科技节上周圆满落幕，我们初一四班的同学们展示了多个富有创意的科技作品。其中，由张伟、李明、赵雪三人小组制作的"智能垃圾分类箱"获得了最佳创意奖。</p>
+        <p>这个作品利用传感器和Arduino板实现了自动识别垃圾类型并分类的功能。评委老师称赞道："这个作品不仅有科技含量，还体现了环保理念，非常符合当前的社会需求。"</p>
+        <div class="hidden-content">
+            <p>除了智能垃圾分类箱外，我们班还有其他优秀作品：自动浇花系统、太阳能充电书包、语音控制台灯等。这些作品都体现了同学们的创新思维和动手能力。</p>
+            <p>科技节上，同学们不仅展示了作品，还向参观的师生讲解原理，锻炼了表达能力和沟通能力。这是一次非常有意义的科技实践活动。</p>
+        </div>
+    </div>
+    <div class="post-footer">
+        <div class="post-tags">
+            <span class="tag active" onclick="filterPosts('all')">全部</span>
+            <span class="tag" onclick="filterPosts('科技节')">科技节</span>
+            <span class="tag" onclick="filterPosts('创新')">创新</span>
+            <span class="tag" onclick="filterPosts('科学')">科学</span>
+        </div>
+        <a class="read-more" onclick="toggleContent(this)">展开全文</a>
+    </div>
+</div>
+
+<!-- ================================ -->
+<!-- 在这里添加更多文章 -->
+<!-- ================================ -->
+
+</div>
+
+<div class="sidebar">
+<h3 class="sidebar-title">分类</h3>
+<ul class="category-list">
+<li><a class="active" onclick="filterPosts('all')">全部文章<span class="category-count">3</span></a></li>
+<li><a onclick="filterPosts('班级活动')">班级活动<span class="category-count">1</span></a></li>
+<li><a onclick="filterPosts('学习分享')">学习分享<span class="category-count">1</span></a></li>
+<li><a onclick="filterPosts('科技节')">科技节<span class="category-count">1</span></a></li>
+<li><a onclick="filterPosts('作品展示')">作品展示<span class="category-count">1</span></a></li>
+</ul>
+
+<div class="recent-posts">
+<h3 class="sidebar-title" style="margin-top:25px;">近期文章</h3>
+<div class="recent-post" onclick="scrollToPost(0)">
+<img src="https://edgeoneimg.cdn.sn/i/694bc7e2b2c27_1766574050.webp" alt="近期文章" class="recent-image">
+<div class="recent-content">
+<div class="recent-title">秋季运动会精彩回顾</div>
+<div class="recent-date">2025年9月8日</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="footer">
+<p>初一四班班级博客 © 2025 | 记录我们的青春时光</p>
+<p style="margin-top:10px;font-size:0.9rem;">站长邮箱saneitr2@126.com</p>
+</div>
+</div>
+
+<script>
+let currentFilter = 'all';
+const posts = document.querySelectorAll('.blog-post');
+const categoryCounts = {};
+
+function countArticlesByCategory() {
+    const categories = {};
+    categories['all'] = posts.length;
+    
+    posts.forEach(post => {
+        const tags = post.dataset.tags.split(' ');
+        tags.forEach(tag => {
+            if (tag) {
+                categories[tag] = (categories[tag] || 0) + 1;
+            }
+        });
+    });
+    
+    return categories;
+}
+
+function updateCategoryCounts() {
+    const categories = countArticlesByCategory();
+    
+    document.querySelectorAll('.category-list a').forEach(a => {
+        const category = a.textContent.replace(/[0-9]/g, '').trim();
+        const countSpan = a.querySelector('.category-count');
+        if (countSpan && categories[category] !== undefined) {
+            countSpan.textContent = categories[category];
+        }
+    });
+}
+
+function filterPosts(tag) {
+    currentFilter = tag;
+    
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.category-list a').forEach(a => a.classList.remove('active'));
+    
+    event.target.classList.add('active');
+    
+    posts.forEach(post => {
+        if (tag === 'all') {
+            post.classList.remove('hidden');
+        } else {
+            const tags = post.dataset.tags.split(' ');
+            if (tags.includes(tag)) {
+                post.classList.remove('hidden');
+            } else {
+                post.classList.add('hidden');
+            }
+        }
+    });
+}
+
+function toggleContent(button) {
+    const content = button.parentElement.parentElement.querySelector('.hidden-content');
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        button.textContent = '收起内容';
+    } else {
+        content.style.display = 'none';
+        button.textContent = '展开全文';
+    }
+}
+
+function scrollToPost(index) {
+    const visiblePosts = Array.from(posts).filter(p => !p.classList.contains('hidden'));
+    if (visiblePosts[index]) {
+        visiblePosts[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        visiblePosts[index].style.backgroundColor = '#f8f9fa';
+        visiblePosts[index].style.boxShadow = '0 0 0 3px rgba(52, 152, 219, 0.3)';
+        setTimeout(() => {
+            visiblePosts[index].style.backgroundColor = 'white';
+            visiblePosts[index].style.boxShadow = '0 5px 20px rgba(0,0,0,0.05)';
+        }, 2000);
+    }
+}
+
+window.onload = function() {
+    updateCategoryCounts();
+};
+</script>
+</body>
+</html>
