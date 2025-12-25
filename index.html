@@ -30,6 +30,127 @@ body{background:#ffffff;color:#333;min-height:100vh;padding:15px}
 .info-value{font-size:1.1rem;color:#2c3e50;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .class-emblem{width:140px;height:140px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 15px rgba(0,0,0,0.1);flex-shrink:0}
 .class-emblem img{width:120px;height:120px;object-fit:contain}
+
+/* 新增表扬栏和处罚栏样式 */
+.discipline-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.praise-section, .punishment-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.discipline-title {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid;
+}
+
+.praise-title {
+    border-bottom-color: #2ecc71;
+    color: #27ae60;
+}
+
+.punishment-title {
+    border-bottom-color: #e74c3c;
+    color: #c0392b;
+}
+
+.discipline-list {
+    list-style: none;
+}
+
+.discipline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+.discipline-item:hover {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.discipline-item:last-child {
+    border-bottom: none;
+}
+
+.discipline-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.discipline-name {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.discipline-reason {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.discipline-date {
+    font-size: 0.85rem;
+    color: #95a5a6;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.discipline-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.praise-status {
+    background-color: #d5f4e6;
+    color: #27ae60;
+}
+
+.punishment-status {
+    background-color: #fdeaea;
+    color: #e74c3c;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 30px 0;
+    color: #95a5a6;
+    font-size: 1rem;
+}
+
+.empty-message i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
 .blog-posts{display:flex;flex-direction:column;gap:30px}
 .posts-main{display:flex;flex-direction:column;gap:30px;width:100%}
 .sidebar{background:white;border-radius:12px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.05);width:100%}
@@ -73,6 +194,17 @@ body{background:#ffffff;color:#333;min-height:100vh;padding:15px}
     .class-info-content{flex:1}
     .class-info-title{text-align:left}
     .class-info-grid{grid-template-columns:repeat(3,1fr)}
+    
+    /* 桌面端表扬栏和处罚栏样式 */
+    .discipline-section {
+        flex-direction: row;
+        gap: 30px;
+    }
+    
+    .praise-section, .punishment-section {
+        flex: 1;
+    }
+    
     .blog-posts{flex-direction:row}
     .posts-main{width:70%}
     .sidebar{width:30%}
@@ -157,6 +289,60 @@ body{background:#ffffff;color:#333;min-height:100vh;padding:15px}
 </div>
 </div>
 
+<!-- 新增：班级表扬栏和处罚栏 -->
+<div class="discipline-section">
+<!-- 表扬栏 -->
+<div class="praise-section">
+<h2 class="discipline-title praise-title">
+<i class="fas fa-award"></i>班级表扬栏
+</h2>
+<ul class="discipline-list" id="praise-list">
+
+<li class="discipline-item">
+<div class="discipline-content">
+<div class="discipline-name">
+<i class="fas fa-user-check"></i>暂无
+</div>
+<div class="discipline-reason">暂无</div>
+<div class="discipline-date">
+<i class="far fa-calendar-alt"></i>2025年12月-日
+</div>
+</div>
+<span class="discipline-status praise-status">未定</span>
+</li>
+
+<!-- 可以添加更多表扬项 -->
+</ul>
+</div>
+
+<!-- 处罚栏 -->
+<div class="punishment-section">
+<h2 class="discipline-title punishment-title">
+<i class="fas fa-exclamation-triangle"></i>班级处罚栏
+</h2>
+<ul class="discipline-list" id="punishment-list">
+<li class="discipline-item">
+<div class="discipline-content">
+<div class="discipline-name">
+<i class="fas fa-user-times"></i>周瑞同学
+</div>
+<div class="discipline-reason">携带手机进入校园，且认错态度不端正</div>
+<div class="discipline-date">
+<i class="far fa-calendar-alt"></i>2025年12月23日
+</div>
+</div>
+<span class="discipline-status punishment-status">处分</span>
+</li>
+
+<!-- 当没有处罚记录时显示 -->
+<!-- <li class="empty-message">
+<i class="far fa-smile"></i>
+<p>近期无处罚记录，继续保持！</p>
+</li> -->
+</ul>
+</div>
+</div>
+
 <div class="blog-posts">
 <div class="posts-main">
 
@@ -183,38 +369,6 @@ body{background:#ffffff;color:#333;min-height:100vh;padding:15px}
             <span class="tag" onclick="filterPosts('运动会')">运动会</span>
             <span class="tag" onclick="filterPosts('班级活动')">班级活动</span>
             <span class="tag" onclick="filterPosts('体育')">体育</span>
-        </div>
-        <a class="read-more" onclick="toggleContent(this)">展开全文</a>
-    </div>
-</div>
-
-
-<!-- 新增文章示例
-<div class="blog-post" data-tags="科技节 创新 科学">
-    <div class="post-header">
-        <h2 class="post-title">
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="科技节">
-            科技节：我们的创意作品展示
-        </h2>
-        <div class="post-date">2023年5月8日</div>
-    </div>
-    <div class="post-image-container">
-        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="科技节" class="post-image">
-    </div>
-    <div class="post-content">
-        <p>学校科技节上周圆满落幕，我们初一四班的同学们展示了多个富有创意的科技作品。其中，由张伟、李明、赵雪三人小组制作的"智能垃圾分类箱"获得了最佳创意奖。</p>
-        <p>这个作品利用传感器和Arduino板实现了自动识别垃圾类型并分类的功能。评委老师称赞道："这个作品不仅有科技含量，还体现了环保理念，非常符合当前的社会需求。"</p>
-        <div class="hidden-content">
-            <p>除了智能垃圾分类箱外，我们班还有其他优秀作品：自动浇花系统、太阳能充电书包、语音控制台灯等。这些作品都体现了同学们的创新思维和动手能力。</p>
-            <p>科技节上，同学们不仅展示了作品，还向参观的师生讲解原理，锻炼了表达能力和沟通能力。这是一次非常有意义的科技实践活动。</p>
-        </div>
-    </div>
-    <div class="post-footer">
-        <div class="post-tags">
-            <span class="tag active" onclick="filterPosts('all')">全部</span>
-            <span class="tag" onclick="filterPosts('科技节')">科技节</span>
-            <span class="tag" onclick="filterPosts('创新')">创新</span>
-            <span class="tag" onclick="filterPosts('科学')">科学</span>
         </div>
         <a class="read-more" onclick="toggleContent(this)">展开全文</a>
     </div>
@@ -334,6 +488,59 @@ function scrollToPost(index) {
         }, 2000);
     }
 }
+
+// 新增功能：表扬栏和处罚栏管理
+function addPraise(name, reason, date, type) {
+    const list = document.getElementById('praise-list');
+    const newItem = document.createElement('li');
+    newItem.className = 'discipline-item';
+    
+    newItem.innerHTML = `
+        <div class="discipline-content">
+            <div class="discipline-name">
+                <i class="fas fa-user-check"></i>${name}
+            </div>
+            <div class="discipline-reason">${reason}</div>
+            <div class="discipline-date">
+                <i class="far fa-calendar-alt"></i>${date}
+            </div>
+        </div>
+        <span class="discipline-status praise-status">${type}</span>
+    `;
+    
+    list.prepend(newItem); // 添加到列表顶部
+}
+
+function addPunishment(name, reason, date, type) {
+    const list = document.getElementById('punishment-list');
+    
+    // 移除"无记录"提示（如果有）
+    const emptyMessage = list.querySelector('.empty-message');
+    if (emptyMessage) {
+        emptyMessage.remove();
+    }
+    
+    const newItem = document.createElement('li');
+    newItem.className = 'discipline-item';
+    
+    newItem.innerHTML = `
+        <div class="discipline-content">
+            <div class="discipline-name">
+                <i class="fas fa-user-times"></i>${name}
+            </div>
+            <div class="discipline-reason">${reason}</div>
+            <div class="discipline-date">
+                <i class="far fa-calendar-alt"></i>${date}
+            </div>
+        </div>
+        <span class="discipline-status punishment-status">${type}</span>
+    `;
+    
+    list.prepend(newItem); // 添加到列表顶部
+}
+
+// 示例：添加新的表扬记录
+// addPraise('陈小芳', '在校外拾金不昧，捡到钱包并归还失主', '2025年12月12日', '道德模范');
 
 window.onload = function() {
     updateCategoryCounts();
